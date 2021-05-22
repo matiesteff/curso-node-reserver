@@ -13,6 +13,7 @@
     const total = await Usuario.countDocuments({estado :true});
 estas 2 consultas a la BD se hacen en el Promice.All
     */
+   
     const [total, usuarios] = await Promise.all([
       Usuario.countDocuments({estado :true}), //esta es otra solicitud a usuarios que seria el const total
        Usuario.find({estado :true})
@@ -89,9 +90,13 @@ estas 2 consultas a la BD se hacen en el Promice.All
     
     //Cambiar el estado del usuario
     const usuario = await Usuario.findByIdAndUpdate(id, {estado : false});
+    const usuarioAutenticado = req.usuario;
+
+
 
     res.json({
-        usuario
+        usuario, 
+        usuarioAutenticado
     });
   }
 

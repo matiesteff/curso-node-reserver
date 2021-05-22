@@ -1,7 +1,19 @@
 
 const { Router} = require ('express');
 const { check } = require('express-validator');
-const { validarCampos} = require('../middelwares/validar-campos');
+
+//los comm=ente para unificar estas importaciones en un mismo archivo index en la carpeta dodne estan todos
+//const { validarCampos} = require('../middelwares/validar-campos');
+//const { esAdminRol, tieneRol } = require('../middelwares/validar-roles');
+//const { validarJWT } = require('../middelwares/validar-jwt');
+const {
+    validarCampos,
+    validarJWT,
+    esAdminRol, tieneRol
+
+} = require('../middelwares');
+
+
 
 const { usuariosGet,
     usuariosPost,
@@ -15,7 +27,7 @@ const router = Router();
 
 router.get('/', usuariosGet);
 
-//el :id es el nombre de la var q yo quiero obtener de la url
+//el :id es el nombre de la var q yo quiero obtener de la url y que tenga la URL
 router.put('/:id',[
     check('id', 'No es un ID valido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
@@ -34,7 +46,11 @@ router.post('/',  [
     validarCampos
 ],usuariosPost);
 
+//el :id es el nombre de la var q yo quiero obtener de la url y que tenga la URL
 router.delete('/:id',[
+    validarJWT,
+    //esAdminRoles, 
+    tieneRol('ADMIN_ROL', 'VENTAS_ROL'),
     check('id', 'No es un ID valido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
     validarCampos
