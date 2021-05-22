@@ -32,7 +32,8 @@ estas 2 consultas a la BD se hacen en el Promice.All
 
   const usuariosPost = async (req, res) => { 
 
-    const {nombre, correo, password, rol} = req.body;// si quiero sacar uno en especifco y tener el resto en otra var, seria const {nombre ... resto} = body
+    const {nombre, correo, password, rol} = req.body;// si quiero sacar uno en especifco 
+    //y tener el resto en otra var, seria const {nombre ... resto} = body
     const usuario = new Usuario( {nombre, correo, password, rol});
     
     //verificar si el correo existe
