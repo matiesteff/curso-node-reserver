@@ -15,7 +15,7 @@ estas 2 consultas a la BD se hacen en el Promice.All
     */
    
     const [total, usuarios] = await Promise.all([
-      Usuario.countDocuments({estado :true}), //esta es otra solicitud a usuarios que seria el const total
+      Usuario.countDocuments({estado :true}), //esta es otra solicitud a usuarios que seria el count total
        Usuario.find({estado :true})
       .skip(Number(desde))
       .limit(Number(limite))//esta es una solicitud a la base de datps que seria el const usuarios

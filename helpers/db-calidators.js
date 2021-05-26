@@ -1,3 +1,4 @@
+const { Categoria, Producto } = require('../models');
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 
@@ -23,6 +24,7 @@ const emailExiste = async (correo = '') =>{
 const existeUsuarioPorId = async (id ) =>{
 
     const existeUsuario = await Usuario.findById (id);
+
     if (!existeUsuario) {
         throw new Error(`El id no existe: ${ correo}.`)
         
@@ -31,5 +33,60 @@ const existeUsuarioPorId = async (id ) =>{
 }
 
 
+const existeCategoria = async (id = '')=>{
+    const existeCategoria = await Categoria.findById(id);
+    if (!existeCategoria) {
+        console.log(' no existe esta categoria')
+        throw new Error(`No existe una categoria para este ID: ${ id}.`)        
+    }
+}
 
-module.exports={esRolValido, emailExiste, existeUsuarioPorId}
+
+
+
+const existeNombreCategoria = async(nombre = '')=>{
+    const existeCat = await Categoria.findOne(nombre.toLocaleUpperCase());
+    if (existeCat) {
+        throw new Error(`Ya existe una categoria con este nombre: ${ nombre}.`)        
+    }
+
+
+}
+
+
+
+const existeProducto = async (id)=>{
+    const existeProducto = await Producto.findById(id);
+
+    if (!existeProducto) {
+        throw new Error(`No existe un Producto para este ID: ${ id}.`)        
+    }
+}
+
+
+
+
+const existeNombreProducto = async(nombre = '')=>{
+    const existePro = await Producto.findOne(nombre);
+    if (existePro) {
+        throw new Error(`Ya existe una categoria con este nombre: ${ nombre}.`)        
+    }
+
+
+}
+
+
+
+
+
+
+
+module.exports={
+    esRolValido, 
+    emailExiste, 
+    existeUsuarioPorId,
+    existeCategoria,
+    existeNombreCategoria,
+    existeProducto,
+    existeNombreProducto
+}
