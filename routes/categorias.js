@@ -23,7 +23,7 @@ router.get('/', obtenerCategorias);
 //obtener una categoria por id - publico
 router.get('/:id', [
     check('id', 'No es un ID de mongo valido').isMongoId(),
-   check('id').custom(existeCategoria),
+   check('id').custom(c=>existeCategoria(c)),//sacar el valor que viene en el link
    validarCampos
 
 

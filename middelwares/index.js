@@ -3,12 +3,14 @@
 const validarCampos = require('../middelwares/validar-campos');
 const validaRoles = require('../middelwares/validar-roles');
 const  validarJWT  = require('../middelwares/validar-jwt');
+const  validarArchivoSubir  = require('../middelwares/validar-archivo');
 
 
 
 module.exports={
     ...validarCampos,
     ...validaRoles,// esta contiene a tieneRol y esRolAdmin
-    ...validarJWT
+    ...validarJWT,
+    ...validarArchivoSubir
 
 }

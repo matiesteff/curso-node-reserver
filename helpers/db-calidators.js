@@ -75,6 +75,15 @@ const existeNombreProducto = async(nombre = '')=>{
 
 }
 
+//validar las colecciones permitidas para el subir archivo
+const coleccionesPermitidas = (coleccion ='', colecciones = []) =>{
+    const uncluida = colecciones.includes(coleccion);
+    if (!uncluida) {
+        throw new Error(`La coleccion ${coleccion} no es permitida, ${colecciones}`)
+    }
+    return true;
+
+}
 
 
 
@@ -88,5 +97,6 @@ module.exports={
     existeCategoria,
     existeNombreCategoria,
     existeProducto,
-    existeNombreProducto
+    existeNombreProducto,
+    coleccionesPermitidas
 }
